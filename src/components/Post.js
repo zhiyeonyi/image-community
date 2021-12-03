@@ -20,7 +20,7 @@ const Post = (props)=> {
                     <Text>{props.contents}</Text>
                 </Grid>
                 <Grid>
-                    <Image shape = "rectangle" src ={props.src}/>
+                    <Image shape = "rectangle" src ={props.image_url}/>
                 </Grid>
                 <Grid padding="16px">
                     <Text margin="0px" bold>댓글{props.comment_cnt}개</Text>
@@ -30,7 +30,6 @@ const Post = (props)=> {
     )
 }
 
-//기본적으로 필요한 props를 넘겨놓음 
 Post.defaultProps = {
     user_info : {
         user_name: "zhiyeon",

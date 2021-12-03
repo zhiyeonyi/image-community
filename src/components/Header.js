@@ -9,20 +9,16 @@ import { apiKey } from "../shared/firebase";
 import Permit from "../shared/Permit";
 const Header = (props) => {
     const dispatch = useDispatch();
-    // const is_login = useSelector ((state) => state.user.is_login);
+    const is_login = useSelector ((state) => state.user.is_login);
     
     const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
     const is_session = sessionStorage.getItem(_session_key)? true:false;
 
     console.log(is_session);
 
-    // if(is_login && is_session){
-    //     return(
-            
-    //     );
-    // }
-
-    <Permit>
+    if(is_login && is_session){
+        return(
+            <Permit>
         <React.Fragment>
                 <Grid is_flex > 
                 {/* padding="4px 16px" */}
@@ -39,7 +35,11 @@ const Header = (props) => {
                     </Grid>
                 </Grid>
             </React.Fragment>
-    </Permit>;
+    </Permit>
+        );
+    }
+
+    
     return (
         <React.Fragment>
             <Grid is_flex >  {/* padding="4px 16px" */}
