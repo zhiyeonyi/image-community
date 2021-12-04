@@ -157,13 +157,19 @@ const addPostFB = (contents="") => {
 const getPostFB = (start = null, size = 3) => {
   return function (dispatch, getState, { history }) {
 
+    let _paging = getState().post.paging;
+
+    if(_paging.start && !_paging.next){
+      return;
+    }
+
     dispatch(loading(true));
     const postDB = firestore.collection("post");
 
     let query= postDB.orderBy("insert_dt", "desc");
 
     if(start){
-      query.startAt(start);
+      query = query.startAt(start);
     }
 
     query.limit(size + 1)
@@ -238,7 +244,7 @@ export default handleActions(
   {
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
-        draft.list = action.payload.post_list;
+        draft.list.push(...action.payload.post_list);
         draft.paging = action.payload.paging;
         draft.is_loading=false;
       }),
